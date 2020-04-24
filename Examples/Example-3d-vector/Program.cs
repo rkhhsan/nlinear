@@ -11,8 +11,8 @@ namespace Example_3d_vector
         static void Main(string[] args)
         {
             //Declare two unit vectors e1, e2
-            Vec3<float> e1 = new Vec3<float>(1, 0, 0);
-            Vec3<float> e2 = new Vec3<float>(0, 1, 0);
+            Vec3<float> e1 = new Vec3<float>(1, 2, 3);
+            Vec3<float> e2 = new Vec3<float>(2, 3, -4);
 
             Vec3<float> e3 = e1.Cross(e2);
 

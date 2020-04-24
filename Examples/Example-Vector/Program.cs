@@ -14,11 +14,13 @@ namespace Example_Vector
          Vec2<int> v1 = new Vec2<int>(1, 0);
          Vec2<int> v2 = new Vec2<int>(0, 1);
 
-         int proj = v1.Dot(v2);
-         proj = v1 ^ v2;
+
+         //Calculate the dot-product :
+         int n1 = v1.Dot(v2);
+         n1 = v1 ^ v2;
 
          //Check if proj == 0
-         Console.WriteLine(proj == 0); //True
+         Console.WriteLine(n1 == 0); //True
 
          //Declare two unit vectors e1, e2
          Vec3<int> e1 = new Vec3<int>(1, 0, 0);
@@ -28,7 +30,7 @@ namespace Example_Vector
          int proj = e1 ^ e2;
 
          //Check if proj == 0
-         Console.WriteLine(proj == 0); //True
+         Console.WriteLine(n1 == 0); //True
 
          //Calculate the cross product
          Vec3<int> e3 = e1 % e2;
