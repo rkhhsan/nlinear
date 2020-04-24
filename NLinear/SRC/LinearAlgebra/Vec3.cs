@@ -13,390 +13,390 @@ using System.Text;
 
 namespace NLinear
 {
-    /// <summary>
-    /// A 3-dimensional vector/point
-    /// </summary>
-    /// <typeparam name="T">A numeric type (float, int, ...)</typeparam>
-    public struct Vec3<T> : IEquatable<Vec3<T>> 
-        where T : IEquatable<T>
-    {
-        /// <summary>
-        ///  The vector components.
-        /// </summary>
-        Numeric<T> x, y, z;
+   /// <summary>
+   /// A 3-dimensional vector/point
+   /// </summary>
+   /// <typeparam name="T">A numeric type (float, int, ...)</typeparam>
+   public struct Vec3<T> : IEquatable<Vec3<T>>
+       where T : IEquatable<T>
+   {
+      /// <summary>
+      ///  The vector components.
+      /// </summary>
+      Numeric<T> x, y, z;
 
-        public T X
-        {
-            get
-            {
-                return x;
-            }
-            set
-            {
-                x = value;
-            }
-        }
+      public T X
+      {
+         get
+         {
+            return x;
+         }
+         set
+         {
+            x = value;
+         }
+      }
 
-        public T Y
-        {
-            get
-            {
-                return y;
-            }
-            set
-            {
-                y = value;
-            }
-        }
+      public T Y
+      {
+         get
+         {
+            return y;
+         }
+         set
+         {
+            y = value;
+         }
+      }
 
-        public T Z
-        {
-            get
-            {
-                return z;
-            }
-            set
-            {
-                z = value;
-            }
-        }
+      public T Z
+      {
+         get
+         {
+            return z;
+         }
+         set
+         {
+            z = value;
+         }
+      }
 
-        /// <summary>
-        ///  Get component at index
-        /// </summary>
-        /// <param name="index"> Index between 0 and 2 </param>
-        /// <returns></returns>
-        public T this[int index]
-        {
-            get
-            {
-                if (index == 0) return x;
-                if (index == 1) return y;
-                
-                return z;
-            }
-        }
+      /// <summary>
+      ///  Get component at index
+      /// </summary>
+      /// <param name="index"> Index between 0 and 2 </param>
+      /// <returns></returns>
+      public T this[int index]
+      {
+         get
+         {
+            if (index == 0) return x;
+            if (index == 1) return y;
 
-        /// <summary>
-        /// Constructor x = y = z = a
-        /// </summary>
-        /// <param name="a"></param>
-        public Vec3(T a)
-        {
-            x = y = z = a;
-        }
+            return z;
+         }
+      }
 
-        /// <summary>
-        /// Constructor (x y z) = (a b c)
-        /// </summary>
-        /// <param name="a"></param>
-        public Vec3(T a, T b, T c)
-        {
-            x = a;
-            y = b;
-            z = c;
-        }
+      /// <summary>
+      /// Constructor x = y = z = a
+      /// </summary>
+      /// <param name="a"></param>
+      public Vec3(T a)
+      {
+         x = y = z = a;
+      }
 
-        /// <summary>
-        /// The dot product.
-        /// </summary>
-        /// <param name="v"></param>
-        /// <returns></returns>
-        public T Dot(Vec3<T> v)
-        {
-            return x * v.x + y * v.y + z * v.z;
-        }
+      /// <summary>
+      /// Constructor (x y z) = (a b c)
+      /// </summary>
+      /// <param name="a"></param>
+      public Vec3(T a, T b, T c)
+      {
+         x = a;
+         y = b;
+         z = c;
+      }
 
-        /// <summary>
-        /// The dot product.
-        /// </summary>
-        /// <param name="v"></param>
-        /// <returns></returns>
-        public static T operator ^(Vec3<T> c1, Vec3<T> c2)
-        {
-            return c1.Dot(c2);
-        }
+      /// <summary>
+      /// The dot product.
+      /// </summary>
+      /// <param name="v"></param>
+      /// <returns></returns>
+      public T Dot(Vec3<T> v)
+      {
+         return x * v.x + y * v.y + z * v.z;
+      }
 
-        /// <summary>
-        /// Cross-product
-        /// </summary>
-        /// <param name="v"></param>
-        /// <returns></returns>
-        public Vec3<T> Cross(Vec3<T> v)
-        {
-            return new Vec3<T>(y * v.z - z * v.y,
-                              z * v.x - x * v.z,
-                              x * v.y - y * v.x);
-        }
+      /// <summary>
+      /// The dot product.
+      /// </summary>
+      /// <param name="v"></param>
+      /// <returns></returns>
+      public static T operator ^(Vec3<T> c1, Vec3<T> c2)
+      {
+         return c1.Dot(c2);
+      }
 
-        /// <summary>
-        /// Cross-product
-        /// </summary>
-        /// <param name="c1"></param>
-        /// <param name="c2"></param>
-        /// <returns></returns>
-        public static Vec3<T> operator %(Vec3<T> c1, Vec3<T> c2)
-        {
-            return c1.Cross(c2);
-        }
+      /// <summary>
+      /// Cross-product
+      /// </summary>
+      /// <param name="v"></param>
+      /// <returns></returns>
+      public Vec3<T> Cross(Vec3<T> v)
+      {
+         return new Vec3<T>(y * v.z - z * v.y,
+                           z * v.x - x * v.z,
+                           x * v.y - y * v.x);
+      }
 
-        /// <summary>
-        /// Component wise addition
-        /// </summary>
-        /// <param name="c1"></param>
-        /// <param name="c2"></param>
-        /// <returns></returns>
-        public static Vec3<T> operator +(Vec3<T> c1, Vec3<T> c2)
-        {
-            Vec3<T> v = new Vec3<T>();
+      /// <summary>
+      /// Cross-product
+      /// </summary>
+      /// <param name="c1"></param>
+      /// <param name="c2"></param>
+      /// <returns></returns>
+      public static Vec3<T> operator %(Vec3<T> c1, Vec3<T> c2)
+      {
+         return c1.Cross(c2);
+      }
 
-            v.x = c1.x + c2.x;
-            v.y = c1.y + c2.y;
-            v.z = c1.z + c2.z;
+      /// <summary>
+      /// Component wise addition
+      /// </summary>
+      /// <param name="c1"></param>
+      /// <param name="c2"></param>
+      /// <returns></returns>
+      public static Vec3<T> operator +(Vec3<T> c1, Vec3<T> c2)
+      {
+         Vec3<T> v = new Vec3<T>();
 
-            return v;
-        }
+         v.x = c1.x + c2.x;
+         v.y = c1.y + c2.y;
+         v.z = c1.z + c2.z;
 
-        /// <summary>
-        /// Component wise subtraction
-        /// </summary>
-        /// <param name="c1"></param>
-        /// <param name="c2"></param>
-        /// <returns></returns>
-        public static Vec3<T> operator -(Vec3<T> c1, Vec3<T> c2)
-        {
-            Vec3<T> v = new Vec3<T>();
+         return v;
+      }
 
-            v.x = c1.x - c2.x;
-            v.y = c1.y - c2.y;
-            v.z = c1.z - c2.z;
+      ///<summary>
+      /// Component wise subtraction
+      /// </summary>
+      /// <param name="c1"></param>
+      /// <param name="c2"></param>
+      /// <returns></returns>
+      public static Vec3<T> operator -(Vec3<T> c1, Vec3<T> c2)
+      {
+         Vec3<T> v = new Vec3<T>();
 
-            return v;
-        }
+         v.x = c1.x - c2.x;
+         v.y = c1.y - c2.y;
+         v.z = c1.z - c2.z;
 
-        /// <summary>
-        /// Component wise inversion -(x y z) = (-x -y -z)
-        /// </summary>
-        /// <param name="c1"></param>
-        /// <param name="c2"></param>
-        /// <returns></returns>
-        public static Vec3<T> operator -(Vec3<T> c1)
-        {
-            Vec3<T> v = new Vec3<T>();
+         return v;
+      }
 
-            v.x = -c1.x;
-            v.y = -c1.y;
-            v.z = -c1.z;
+      /// <summary>
+      /// Component wise inversion -(x y z) = (-x -y -z)
+      /// </summary>
+      /// <param name="c1"></param>
+      /// <param name="c2"></param>
+      /// <returns></returns>
+      public static Vec3<T> operator -(Vec3<T> c1)
+      {
+         Vec3<T> v = new Vec3<T>();
 
-            return v;
-        }
+         v.x = -c1.x;
+         v.y = -c1.y;
+         v.z = -c1.z;
 
-        /// <summary>
-        /// Component wise inversion -(x y z) = (-x -y -z)
-        /// </summary>
-        /// <returns></returns>
-        public Vec3<T> Negate()
-        {
-            x = -x;
-            y = -y;
-            z = -z;
+         return v;
+      }
 
-            return this;
-        }
+      /// <summary>
+      /// Component wise inversion -(x y z) = (-x -y -z)
+      /// </summary>
+      /// <returns></returns>
+      public Vec3<T> Negate()
+      {
+         x = -x;
+         y = -y;
+         z = -z;
 
-        /// <summary>
-        /// Component wise multiplication
-        /// </summary>
-        /// <param name="c1"></param>
-        /// <param name="c2"></param>
-        /// <returns></returns>
-        public static Vec3<T> operator *(Vec3<T> c1, Vec3<T> c2)
-        {
-            Vec3<T> v = new Vec3<T>();
+         return this;
+      }
 
-            v.x = c1.x * c2.x;
-            v.y = c1.y * c2.y;
-            v.z = c1.z * c2.z;
+      /// <summary>
+      /// Component wise multiplication
+      /// </summary>
+      /// <param name="c1"></param>
+      /// <param name="c2"></param>
+      /// <returns></returns>
+      public static Vec3<T> operator *(Vec3<T> c1, Vec3<T> c2)
+      {
+         Vec3<T> v = new Vec3<T>();
 
-            return v;
-        }
+         v.x = c1.x * c2.x;
+         v.y = c1.y * c2.y;
+         v.z = c1.z * c2.z;
 
-        /// <summary>
-        /// Component wise multiplication by a constant
-        /// </summary>
-        /// <param name="c1"></param>
-        /// <param name="c"></param>
-        /// <returns></returns>
-        public static Vec3<T> operator *(Vec3<T> c1, T c)
-        {
-            Vec3<T> v = new Vec3<T>();
+         return v;
+      }
 
-            v.x = c1.x * c;
-            v.y = c1.y * c;
-            v.z = c1.z * c;
+      /// <summary>
+      /// Component wise multiplication by a constant
+      /// </summary>
+      /// <param name="c1"></param>
+      /// <param name="c"></param>
+      /// <returns></returns>
+      public static Vec3<T> operator *(Vec3<T> c1, T c)
+      {
+         Vec3<T> v = new Vec3<T>();
 
-            return v;
-        }
+         v.x = c1.x * c;
+         v.y = c1.y * c;
+         v.z = c1.z * c;
 
-        /// <summary>
-        /// Component wise multiplication by a constant
-        /// </summary>
-        /// <param name="c1"></param>
-        /// <param name="c"></param>
-        /// <returns></returns>
-        public static Vec3<T> operator *(T c, Vec3<T> c1)
-        {
-            Vec3<T> v = new Vec3<T>();
+         return v;
+      }
 
-            v.x = c1.x * c;
-            v.y = c1.y * c;
-            v.z = c1.z * c;
+      /// <summary>
+      /// Component wise multiplication by a constant
+      /// </summary>
+      /// <param name="c1"></param>
+      /// <param name="c"></param>
+      /// <returns></returns>
+      public static Vec3<T> operator *(T c, Vec3<T> c1)
+      {
+         Vec3<T> v = new Vec3<T>();
 
-            return v;
-        }
+         v.x = c1.x * c;
+         v.y = c1.y * c;
+         v.z = c1.z * c;
 
-        /// <summary>
-        /// Component wise division
-        /// </summary>
-        /// <param name="c1"></param>
-        /// <param name="c"></param>
-        /// <returns></returns>
-        public static Vec3<T> operator /(Vec3<T> c1, Vec3<T> c2)
-        {
-            Vec3<T> v = new Vec3<T>();
+         return v;
+      }
 
-            v.x = c1.x / c2.x;
-            v.y = c1.y / c2.y;
-            v.z = c1.z / c2.z;
+      /// <summary>
+      /// Component wise division
+      /// </summary>
+      /// <param name="c1"></param>
+      /// <param name="c"></param>
+      /// <returns></returns>
+      public static Vec3<T> operator /(Vec3<T> c1, Vec3<T> c2)
+      {
+         Vec3<T> v = new Vec3<T>();
 
-            return v;
-        }
+         v.x = c1.x / c2.x;
+         v.y = c1.y / c2.y;
+         v.z = c1.z / c2.z;
 
-        /// <summary>
-        /// Component wise division by a constant
-        /// </summary>
-        /// <param name="c1"></param>
-        /// <param name="c"></param>
-        /// <returns></returns>
-        public static Vec3<T> operator /(Vec3<T> c1, T c)
-        {
-            Vec3<T> v = new Vec3<T>();
+         return v;
+      }
 
-            v.x = c1.x / c;
-            v.y = c1.y / c;
-            v.z = c1.z / c;
+      /// <summary>
+      /// Component wise division by a constant
+      /// </summary>
+      /// <param name="c1"></param>
+      /// <param name="c"></param>
+      /// <returns></returns>
+      public static Vec3<T> operator /(Vec3<T> c1, T c)
+      {
+         Vec3<T> v = new Vec3<T>();
 
-            return v;
-        }
+         v.x = c1.x / c;
+         v.y = c1.y / c;
+         v.z = c1.z / c;
 
-        /// <summary>
-        /// Length of the vector
-        /// </summary>
-        /// <returns></returns>
-        public T Length(T unit)
-        {
-            return GenericMath.Sqrt<T>(x * x + y * y + z * z, unit);
-        }
+         return v;
+      }
 
-        /// <summary>
-        /// Squared length of the vector
-        /// </summary>
-        /// <returns></returns>
-        public T Length2()
-        {
-            return x * x + y * y + z * z;
-        }
+      /// <summary>
+      /// Length of the vector
+      /// </summary>
+      /// <returns></returns>
+      public T Length(T unit)
+      {
+         return GenericMath.Sqrt<T>(x * x + y * y + z * z, unit);
+      }
 
-        /// <summary>
-        /// Normalize the vector (x y z) / Length( (x y z) )
-        /// </summary>
-        /// <returns></returns>
-        public Vec3<T> Normalize(T unit)
-        {
-            T l = Length(unit);
+      /// <summary>
+      /// Squared length of the vector
+      /// </summary>
+      /// <returns></returns>
+      public T Length2()
+      {
+         return x * x + y * y + z * z;
+      }
 
-            Numeric<T> numL = l;
+      /// <summary>
+      /// Normalize the vector (x y z) / Length( (x y z) )
+      /// </summary>
+      /// <returns></returns>
+      public Vec3<T> Normalize(T unit)
+      {
+         T l = Length(unit);
 
-            if (!numL.Equals(Numeric<T>.Zero()))
-            {
-                x /= l;
-                y /= l;
-                z /= l;
-            }
+         Numeric<T> numL = l;
 
-            return this;
-        }
+         if (!numL.Equals(Numeric<T>.Zero()))
+         {
+            x /= l;
+            y /= l;
+            z /= l;
+         }
 
-        /// <summary>
-        /// get a normalized vector (x y z) / Length( (x y z) )
-        /// </summary>
-        /// <returns></returns>
-        public Vec3<T> Normalized(T unit)
-        {
-            T l = Length(unit);
+         return this;
+      }
 
-            Numeric<T> numL = l;
+      /// <summary>
+      /// get a normalized vector (x y z) / Length( (x y z) )
+      /// </summary>
+      /// <returns></returns>
+      public Vec3<T> Normalized(T unit)
+      {
+         T l = Length(unit);
 
-            if (numL.Equals(Numeric<T>.Zero()))
-                return new Vec3<T>(Numeric<T>.Zero());
+         Numeric<T> numL = l;
 
-            return new Vec3<T>(x / l, y / l, z / l);
-        }
+         if (numL.Equals(Numeric<T>.Zero()))
+            return new Vec3<T>(Numeric<T>.Zero());
 
-        #region Equality
+         return new Vec3<T>(x / l, y / l, z / l);
+      }
 
-        public override bool Equals(object obj)
-        {
-            if (obj != null && obj is Vec3<T>)
-            {
-                Vec3<T> other = (Vec3<T>)obj;
-                return Equals(ref this, ref other);
-            }
-            return base.Equals(obj);
-        }
+      #region Equality
 
-        public bool Equals(Vec3<T> other)
-        {
-            return Equals(this, other);
-        }
+      public override bool Equals(object obj)
+      {
+         if (obj != null && obj is Vec3<T>)
+         {
+            Vec3<T> other = (Vec3<T>)obj;
+            return Equals(ref this, ref other);
+         }
+         return base.Equals(obj);
+      }
 
-        public static bool operator ==(Vec3<T> v1, Vec3<T> v2)
-        {
-            return EqualityComparer<T>.Default.Equals(v1.X, v2.X)
-                && EqualityComparer<T>.Default.Equals(v1.Y, v2.Y)
-                && EqualityComparer<T>.Default.Equals(v1.Z, v2.Z);
-        }
+      public bool Equals(Vec3<T> other)
+      {
+         return Equals(this, other);
+      }
 
-        public static bool operator !=(Vec3<T> v1, Vec3<T> v2)
-        {
-            return !(EqualityComparer<T>.Default.Equals(v1.X, v2.X)
-                    && EqualityComparer<T>.Default.Equals(v1.Y, v2.Y)
-                    && EqualityComparer<T>.Default.Equals(v1.Z, v2.Z));
-        }
+      public static bool operator ==(Vec3<T> v1, Vec3<T> v2)
+      {
+         return EqualityComparer<T>.Default.Equals(v1.X, v2.X)
+             && EqualityComparer<T>.Default.Equals(v1.Y, v2.Y)
+             && EqualityComparer<T>.Default.Equals(v1.Z, v2.Z);
+      }
 
-        private static bool Equals(ref Vec3<T> v1, ref Vec3<T> v2)
-        {
-            return EqualityComparer<T>.Default.Equals(v1.X, v2.X)
-                && EqualityComparer<T>.Default.Equals(v1.Y, v2.Y)
-                && EqualityComparer<T>.Default.Equals(v1.Z, v2.Z);
-        }
+      public static bool operator !=(Vec3<T> v1, Vec3<T> v2)
+      {
+         return !(EqualityComparer<T>.Default.Equals(v1.X, v2.X)
+                 && EqualityComparer<T>.Default.Equals(v1.Y, v2.Y)
+                 && EqualityComparer<T>.Default.Equals(v1.Z, v2.Z));
+      }
 
-        public override int GetHashCode()
-        {
-            int hashCode = 67;
+      private static bool Equals(ref Vec3<T> v1, ref Vec3<T> v2)
+      {
+         return EqualityComparer<T>.Default.Equals(v1.X, v2.X)
+             && EqualityComparer<T>.Default.Equals(v1.Y, v2.Y)
+             && EqualityComparer<T>.Default.Equals(v1.Z, v2.Z);
+      }
 
-            hashCode = hashCode * 71 + x.GetHashCode();
-            hashCode = hashCode * 71 + y.GetHashCode();
-            hashCode = hashCode * 71 + z.GetHashCode();
+      public override int GetHashCode()
+      {
+         int hashCode = 67;
 
-            return hashCode;
-        }
+         hashCode = hashCode * 71 + x.GetHashCode();
+         hashCode = hashCode * 71 + y.GetHashCode();
+         hashCode = hashCode * 71 + z.GetHashCode();
 
-        #endregion
+         return hashCode;
+      }
 
-        public override string ToString()
-        {
-            return String.Format("({0}, {1}, {2})", X, Y, Z);
-        }
-    }
+      #endregion
+
+      public override string ToString()
+      {
+         return String.Format("({0}, {1}, {2})", X, Y, Z);
+      }
+   }
 }
